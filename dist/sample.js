@@ -86,7 +86,7 @@ function f2(t, y, ydot, data)
 	ydot[2] = -ydot[1] - ydot[3];
 }
 
-function f2root(t, y, gout){
+function f2root(t, y, gout, data){
 	gout[1] = y[1] - 1.e-4;
 	gout[2] = y[3] - 1.e-2;
 }

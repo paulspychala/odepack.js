@@ -20,8 +20,8 @@ import {vmnorm} from "./vmnorm";
 import {fnorm} from "./fnorm";
 import {cfode} from "./cfode";
 
-export type lsoda_func = (t: number, y: number[], ydot: number[], data: number[]) => any
-export type jac_func = (t: number, y: number[], ml: number, mu: number, wm: number[][]) => any
+export type lsoda_func = (t: number, y: number[], ydot: number[], data: any) => any
+export type jac_func = (t: number, y: number[], ml: number, mu: number, wm: number[][], data: any) => any
 
 export class LSODA {
 
@@ -1453,7 +1453,7 @@ prja(neq: number, y: number[], f: any, jac: any, _data: number[])
 				this.wm[i][j] = 0
 			}
 		}
-		jac(this.tn, y, 0, 0, this.wm)
+		jac(this.tn, y, 0, 0, this.wm, _data)
 		for (i = 1; i <= this.n; i++) {
 			for(j = 1; j <= this.n; j++) {
 				this.wm[i][j] *= -hl0
@@ -1490,7 +1490,7 @@ prja(neq: number, y: number[], f: any, jac: any, _data: number[])
 				this.wm[i][j] = 0
 			}
 		}
-		jac(this.tn, y, this.ml, this.mu, this.wm)
+		jac(this.tn, y, this.ml, this.mu, this.wm, _data)
 		// pointerMath fixes ml3 = ml + 3 (1 + 2offset), so we shift it by ml
 		for (i = meband; i >= 1; i--) {
 			for (let j = 1; j <= this.n; j++) {

@@ -150,6 +150,7 @@ lsoda(f: lsoda_func, neq: number, y: number[], t: number, tout: number,
 >* jac    = name of subroutine for jacobian matrix.
 >          use a dummy name.  
 >* jt     = jacobian type indicator.  set jt = 2. 
+>* _data  = optional data passed to the f, jac, and g (see lsodar) subroutine 
 
 The program also has several optional inputs to set and will be used if you set iopt = 1 as mentioned above.
 
@@ -189,8 +190,8 @@ The program also has several optional inputs to set and will be used if you set 
 
 func f and jac will need to be of type:
 ```ts
-type lsoda_func = (t: number, y: number[], ydot: number[], data: number[]) => any
-type jac_func = (t: number, y: number[], ml: number, mu: number, wm: number[][]) => any
+type lsoda_func = (t: number, y: number[], ydot: number[], data: any) => any
+type jac_func = (t: number, y: number[], ml: number, mu: number, wm: number[][], data: any) => any
 ```           
 
 On call return the program will return: 
@@ -221,7 +222,7 @@ lsodar(f: lsoda_func, neq: number, y: number[], t: number, tout: number,
     iwork7: number, iwork8: number, iwork9: number,
     rwork1: number, rwork5: number, rwork6: number, rwork7: number,
     g: lsodar_root_func, ng: number, jroot: number[],
-    _data: any[]): [number, number]
+    _data: any): [number, number]
 ```
 
 Using LSODAR will be nearly identical to LSODA except for a few added function parameters:
@@ -236,5 +237,29 @@ Using LSODAR will be nearly identical to LSODA except for a few added function p
 
 func g will need to be of type:
 ```ts
-type lsodar_root_func = (t: number, y: number[], gout: number[]) => any
+type lsodar_root_func = (t: number, y: number[], gout: number[], data: any) => any
 ```
+
+On call return, the program will return:
+
+>* t = corresponding value of independent variable.  this is
+          tout if istate = 2, or the root location if istate = 3,
+          or the farthest point reached if lsodar was unsuccessful.
+>* istate = 2 or 3  if lsodar was successful, negative otherwise.
+           2 means no root was found, and tout was reached as desired.
+           3 means a root was found prior to reaching tout.
+          -1 means excess work done on this call (perhaps wrong jt).
+          -2 means excess accuracy requested (tolerances too small).
+          -3 means illegal input detected (see printed message).
+          -4 means repeated error test failures (check all inputs).
+          -5 means repeated convergence failures (perhaps bad jacobian
+             supplied or wrong choice of jt or tolerances).
+          -6 means error weight became zero during problem. (solution
+             component i vanished, and atol or atol(i) = 0.)
+          -7 means work space insufficient to finish (see messages).
+
+The program will also modify
+
+>* y = array of computed values of y(t) vector.
+>* jroot = array showing roots found if istate = 3 on return.
+          jroot(i) = 1 if g(i) has a root at t, or 0 otherwise.

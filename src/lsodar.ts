@@ -14,7 +14,7 @@ import {ewset} from "./ewset";
 import {scopy} from "./scopy";
 import {vmnorm} from "./vmnorm";
 
-export type lsodar_root_func = (t: number, y: number[], gout: number[]) => any
+export type lsodar_root_func = (t: number, y: number[], gout: number[], data: any) => any
 
 export class LSODAR extends LSODA {
     nge: number      // the number of g evaluation for the problem so far
@@ -195,7 +195,7 @@ export class LSODAR extends LSODA {
         iwork7: number, iwork8: number, iwork9: number,
         rwork1: number, rwork5: number, rwork6: number, rwork7: number,
         g: lsodar_root_func, ng: number, jroot: number[],
-        _data: any[]): [number, number]
+        _data: any): [number, number]
 /*
 optional inputs.
 The following is a list of the optional inputs provided for in the
@@ -680,7 +680,7 @@ mcur    iwork20 the current method indicator..
             this.irfnd = 0
             this.toutc = tout
             if (this.ngc != 0) {
-                irt = this.rchek(1, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt)
+                irt = this.rchek(1, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt, _data)
                 if (irt != 0) {
                     console.error(`[lsodar] one or more components of g has a root too near to the initial point: ${t}`);
                     return [t,this.terminate(istate)];
@@ -703,7 +703,7 @@ mcur    iwork20 the current method indicator..
             irfp = this.irfnd
             if (this.ngc != 0) {
                 if (itask == 1 || itask == 4) this.toutc = tout
-                irt = this.rchek (2, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt)
+                irt = this.rchek (2, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt, _data)
                 if (irt == 1) {
                     this.irfnd = 1
                     istate = 3
@@ -889,7 +889,7 @@ mcur    iwork20 the current method indicator..
                     root check
                 */
                 if (this.ngc != 0){
-                    irt = this.rchek (3, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt)
+                    irt = this.rchek (3, g, neq, y, this.yh, this.nyh, this.g0, this.g1, this.gx, jroot, irt, _data)
                     if (irt == 1) {
                         this.irfnd = 1
                         istate = 3
@@ -1046,7 +1046,7 @@ mcur    iwork20 the current method indicator..
      ngc    = copy of ng (input only).
     -----------------------------------------------------------------------
     */
-    rchek (job: number, g: lsodar_root_func, neq: number, y: number[], yh: number[][], nyh: number, g0: number[], g1: number[], gx: number[], jroot: number[], irt: number) {
+    rchek (job: number, g: lsodar_root_func, neq: number, y: number[], yh: number[][], nyh: number, g0: number[], g1: number[], gx: number[], jroot: number[], irt: number, data: any) {
         // local variables
         var t1: number
         var x: number
@@ -1069,7 +1069,7 @@ mcur    iwork20 the current method indicator..
             case 1:
                 // evaluate g at initial t, and check for zero values. ------------------
                 this.t0 = this.tn
-                g (this.t0, y, g0)
+                g (this.t0, y, g0, data)
                 this.nge = 1
                 zroot = false
                 for (let i = 1; i <= this.ngc; i++) {
@@ -1084,7 +1084,7 @@ mcur    iwork20 the current method indicator..
                         // y[i] = y[i] + temp2*this.yh[i][2]
                         y[i] = y[i] + temp2*this.yh[2][i]
                     }
-                    g (this.t0, y, g0)
+                    g (this.t0, y, g0, data)
                     this.nge = this.nge + 1
                     zroot = false
                     for (let i = 1; i <= this.ngc; i++) {
@@ -1102,7 +1102,7 @@ mcur    iwork20 the current method indicator..
                 if(this.irfnd != 0) {
                     // if a root was found on the previous step, evaluate g0 = g(t0). -------
                     iflag = this.intdy(this.t0, 0, y, iflag)
-                    g(this.t0, y, g0)
+                    g(this.t0, y, g0, data)
                     this.nge = this.nge + 1
                     zroot = false
                     for (let i = 1; i <= this.ngc; i++) {
@@ -1121,7 +1121,7 @@ mcur    iwork20 the current method indicator..
                                 y[i] = y[i] + temp2*this.yh[2][i]
                             }
                         }
-                        g (this.t0, y, g0)
+                        g (this.t0, y, g0, data)
                         this.nge = this.nge + 1
                         zroot = false
                         for (let i = 1; i <= this.ngc; i++) {
@@ -1157,7 +1157,7 @@ mcur    iwork20 the current method indicator..
                         y[i] = yh[1][i]
                     }
                 }
-                g (t1, y, g1)
+                g (t1, y, g1, data)
                 this.nge = this.nge + 1
                 // call roots to search for root in interval from t0 to t1. -------------
                 jflag = 0
@@ -1165,7 +1165,7 @@ mcur    iwork20 the current method indicator..
                     [jflag, this.t0, t1, x] = this.roots(this.ngc, hming, jflag, this.t0, t1, g0, g1, gx, x, jroot)
                     if (jflag > 1) break
                     iflag = this.intdy (x, 0, y, iflag)
-                    g (x, y, gx)
+                    g (x, y, gx, data)
                     this.nge = this.nge + 1
                 }
                 this.t0 = x
