@@ -4,7 +4,7 @@
     jack dongarra, linpack, 6/17/77.
     translated to typescript by Pawel Spychala 2020
 */
-export default function sscal(n: number, sa: number, sx: number[], sxoffset: number, incx: number)
+export function sscal(n: number, sa: number, sx: number[], sxoffset: number, incx: number)
 {
     let m: number
     let i: number

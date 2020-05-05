@@ -1,0 +1,13 @@
+{
+  "name": "odepack.js",
+  "version": "1.0.0",
+  "main": "out/odepack.js",
+  "author": "Pawel Spychala <paulspychala@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.7.6",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "typescript": "^3.8.3"
+  }
+}

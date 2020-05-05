@@ -64,11 +64,11 @@
  cleve moler, university of new mexico, argonne national labs.
  translated to typescript by Pawel Spychala 2020
 */
-import isamax from "./isamax";
-import sscal from "./sscal";
-import saxpy from "./saxpy";
+import {isamax} from "./isamax";
+import {sscal} from "./sscal";
+import {saxpy} from "./saxpy";
 
-export default function sgbfa(abd: number[][],lda: number,n: number,ml: number,mu: number, ipvt: number[],info: number) : number {
+export function sgbfa(abd: number[][],lda: number,n: number,ml: number,mu: number, ipvt: number[],info: number) : number {
     let t: number
     let i: number
     // let isamax: number

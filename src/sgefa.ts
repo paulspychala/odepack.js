@@ -33,11 +33,11 @@
  cleve moler, university of new mexico, argonne national labs.
  translation to Typescript by Pawel Spychala 2020
 */
-import saxpy from "./saxpy";
-import isamax from "./isamax";
-import sscal from "./sscal";
+import {saxpy} from "./saxpy";
+import {isamax} from "./isamax";
+import {sscal} from "./sscal";
 
-export default function sgefa(a: number[][], n: number, ipvt: number[], info: number) : number
+export function sgefa(a: number[][], n: number, ipvt: number[], info: number) : number
 {
     let k: number
     let i: number

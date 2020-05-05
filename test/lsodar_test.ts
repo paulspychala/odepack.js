@@ -1,5 +1,5 @@
-import LSODA from "../src/lsoda";
-import LSODAR from "../src/lsodar";
+import {LSODA} from "../src/lsoda";
+import {LSODAR} from "../src/lsodar";
 
 
 function lsodar_test3_f(t: number, y: number[], ydot: number[], data: number[])
@@ -25,8 +25,6 @@ function lsodar_test3(){
 	let itask = 1
 	let istate = 1
 	let iopt = 0
-	let lrw = 76
-	let liw = 23
 	let jt = 2
 	let ng = 2
 	let jroot: number[] = new Array(3)
@@ -94,7 +92,7 @@ function lsodar_test3(){
  a warning message is printed.  All output is on unit lout = 6.
 -----------------------------------------------------------------------
 */
-export default function run_lsodar_tests(){
+export function run_lsodar_tests(){
 	let nerr = 0
 
 	console.log(`\nDemonstration program for DLSODAR package\n`)

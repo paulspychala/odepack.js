@@ -11,19 +11,19 @@
   http://lh3lh3.users.sourceforge.net/download/this.c
 
 */
-import ewset from "./ewset";
-import sgesl from "./sgesl";
-import sgbsl from "./sgbsl";
-import sgefa from "./sgefa";
-import sgbfa from "./sgbfa";
-import vmnorm from "./vmnorm";
-import fnorm from "./fnorm";
-import cfode from "./cfode";
+import {ewset} from "./ewset";
+import {sgesl} from "./sgesl";
+import {sgbsl} from "./sgbsl";
+import {sgefa} from "./sgefa";
+import {sgbfa} from "./sgbfa";
+import {vmnorm} from "./vmnorm";
+import {fnorm} from "./fnorm";
+import {cfode} from "./cfode";
 
 export type lsoda_func = (t: number, y: number[], ydot: number[], data: number[]) => any
 export type jac_func = (t: number, y: number[], ml: number, mu: number, wm: number[][]) => any
 
-export default class LSODA {
+export class LSODA {
 
 create2dArray(size1: number, size2: number) : number[][] {
 	let ret = new Array(size1)
@@ -315,7 +315,7 @@ lsoda(f: lsoda_func, neq: number, y: number[], t: number, tout: number,
 			iwork1: number, iwork2: number, iwork5: number, iwork6: number,
 			iwork7: number, iwork8: number, iwork9: number,
 			rwork1: number, rwork5: number, rwork6: number, rwork7: number, 
-			_data: any[]) : [number, number]
+			_data: any) : [number, number]
 /*
    If the user does not supply any of these values, the calling program
    should initialize those untouched working variables to zero.

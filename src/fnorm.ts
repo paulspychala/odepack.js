@@ -8,7 +8,7 @@
    translated to typescript by Pawel Spychala 2020
 -----------------------------------------------------------------------
 */
-export default function fnorm(n: number, a: number[][], w: number[]) : number {
+export function fnorm(n: number, a: number[][], w: number[]) : number {
 	let i: number
 	let j: number;
 	let an: number

@@ -9,14 +9,14 @@
     - Pawel Spychala <paulspychala@gmail.com>
 */
 
-import LSODA, { jac_func, lsoda_func } from "./lsoda";
-import ewset from "./ewset";
-import scopy from "./scopy";
-import vmnorm from "./vmnorm";
+import { LSODA, jac_func, lsoda_func } from "./lsoda";
+import {ewset} from "./ewset";
+import {scopy} from "./scopy";
+import {vmnorm} from "./vmnorm";
 
 export type lsodar_root_func = (t: number, y: number[], gout: number[]) => any
 
-export default class LSODAR extends LSODA {
+export class LSODAR extends LSODA {
     nge: number      // the number of g evaluation for the problem so far
     t0: number       // value of t at one endpoint of interval of interest.
     irfnd: number    // input flag showing whether the last step taken had a root. 
@@ -242,7 +242,7 @@ h0      rwork5  the step size to be attempted on the first step.
                 the default value is determined by the solver
 hmax    rwork6  the maximum absolute step size allowed.
                 the default value is infinite
-hmin    rwork7  thge minimum absolute step size allowed.
+hmin    rwork7  the minimum absolute step size allowed.
                 the default value is 0. (this lower bound is not enforced)
                 on the final step before reaching tcrit when itask = 4 or 5)
 

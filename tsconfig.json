@@ -1,9 +1,18 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "es6",
       "lib": ["es2015","DOM"],
-      "module": "CommonJS",
+      "module": "ES2015",
       "sourceMap": true,
+      // "declaration": true,
+      // "outFile": "out/odepack.js"
       "outDir": "out"
-    }
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+
   }

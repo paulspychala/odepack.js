@@ -7,7 +7,7 @@
 
     Pawel Spychala 2020
 */
-export default function scopy(sx: number[],sy: number[]) {
+export function scopy(sx: number[],sy: number[]) {
     for (let i = 1; i < sx.length; i++) {
         sy[i] = sx[i]
     }

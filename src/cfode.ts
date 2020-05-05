@@ -28,7 +28,7 @@
  translation to Typescript by Pawel Spychala 2020
 -----------------------------------------------------------------------
 */
-export default function cfode(meth: number, elco: number[][], tesco: number[][])
+export function cfode(meth: number, elco: number[][], tesco: number[][])
 {
 	let i: number
 	let nq: number

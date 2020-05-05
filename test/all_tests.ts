@@ -1,5 +1,5 @@
-import run_lsoda_tests from "./lsoda_test";
-import run_lsodar_tests from "./lsodar_test";
+import {run_lsoda_tests} from "./lsoda_test";
+import {run_lsodar_tests} from "./lsodar_test";
 
 run_all_tests();
 

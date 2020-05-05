@@ -41,10 +41,10 @@
     cleve moler, university of new mexico, argonne national labs.
     translated to typescript by Pawel Spychala 2020
 */
-import sdot from "./sdot";
-import saxpy from "./saxpy";
+import {sdot} from "./sdot";
+import {saxpy} from "./saxpy";
 
-export default function sgbsl(abd: number[][],lda, n: number, ml: number, mu: number, ipvt: number[], b: number[], job: number) {
+export function sgbsl(abd: number[][],lda, n: number, ml: number, mu: number, ipvt: number[], b: number[], job: number) {
     let t: number
     let k: number
     let kb: number

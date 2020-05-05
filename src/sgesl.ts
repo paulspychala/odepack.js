@@ -50,10 +50,10 @@
     cleve moler, university of new mexico, argonne national labs.
     translated to Typrscript by Pawel Spychala 2020
 */
-import sdot from "./sdot";
-import saxpy from "./saxpy";
+import {sdot} from "./sdot";
+import {saxpy} from "./saxpy";
 
-export default function sgesl(a: number[][], n: number, ipvt: number[], b: number[], job: number)
+export function sgesl(a: number[][], n: number, ipvt: number[], b: number[], job: number)
 {
     let nm1: number
     let k: number

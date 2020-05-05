@@ -4,7 +4,7 @@
     jack dongarra, linpack, 6/17/77.
     translated to Typescript by Pawel Spychala 2020
 */
-export default function saxpy(n: number, sa: number, sx: number[], sxoffset: number, incx, sy: number[], syoffset: number, incy: number)
+export function saxpy(n: number, sa: number, sx: number[], sxoffset: number, incx, sy: number[], syoffset: number, incy: number)
 {
     let ix: number
     let iy: number

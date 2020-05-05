@@ -8,7 +8,7 @@
     translated to Typescript by Pawel Spychala 2020
 -----------------------------------------------------------------------
 */
-export default function ewset(n: number, itol: number, rtol: number[], atol: number[], ycur: number[], ewt: number[]) {
+export function ewset(n: number, itol: number, rtol: number[], atol: number[], ycur: number[], ewt: number[]) {
     var i: number
 
     switch (itol) {

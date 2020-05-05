@@ -12,9 +12,9 @@
  a warning message is printed.  All output is on unit lout = 6.
 -----------------------------------------------------------------------
 */
-import LSODA from "../src/lsoda";
+import {LSODA} from "../src/lsoda";
 
-export default function run_lsoda_tests() {
+export function run_lsoda_tests() {
      lsoda_test1();
      lsoda_test()
 }

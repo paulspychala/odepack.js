@@ -4,7 +4,7 @@
     jack dongarra, linpack, 6/17/77.
     translated by Pawel Spychala 2020
 */
-export default function sdot(n: number, sx: number[], sxoffset: number, incx: number, sy: number[], syoffset: number, incy: number) : number
+export function sdot(n: number, sx: number[], sxoffset: number, incx: number, sy: number[], syoffset: number, incy: number) : number
 {
     let dotprod: number
     let ix: number

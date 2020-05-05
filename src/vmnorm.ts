@@ -8,7 +8,7 @@
    translated to Typescript by Pawel Spychala 2020
 -----------------------------------------------------------------------
 */
-export default function vmnorm(n: number, v: number[], w: number[]) : number {
+export function vmnorm(n: number, v: number[], w: number[]) : number {
 	let i: number;
 	let vm: number;
 

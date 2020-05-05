@@ -3,7 +3,7 @@
     jack dongarra, linpack, 6/17/77.
     translated to typescript by Pawel Spychala 2020
 */
-export default function isamax(n: number, sx: number[], sxoffset: number, incx: number) : number
+export function isamax(n: number, sx: number[], sxoffset: number, incx: number) : number
 {
     let smax: number
     let xmag: number

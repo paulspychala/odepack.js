@@ -8,7 +8,7 @@
     translated to Typescript by Pawel Spychala 2020
 -----------------------------------------------------------------------
 */
-export default function vnorm (n: number, v: number[], w: number[]) {
+export function vnorm (n: number, v: number[], w: number[]) {
     let sum = 0
     for (let i = 1; i <= n; i++) {
         sum += Math.pow((v[i] * w[i]),2)
